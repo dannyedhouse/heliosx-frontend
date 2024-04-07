@@ -1,9 +1,12 @@
 import "./App.css";
+import { queryQuestions } from "./api/queryQuestions";
 import { ConsultationForm } from "./components/ConsultationForm/ConsultationForm";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 
 function App() {
+  const questions = queryQuestions();
+
   return (
     <>
       <div className="min-h-screen flex flex-col">
@@ -11,7 +14,9 @@ function App() {
         <main className="flex-1 overflow-y-auto bg-background flex justify-center">
           <div className="container">
             <div className="flex justify-between h-full">
-              <div className="p-4 m-auto lg:m-0">{<ConsultationForm />}</div>
+              <div className="p-4 m-auto lg:m-0">
+                {<ConsultationForm questions={questions} />}
+              </div>
               <img
                 src="./hero.png"
                 width={400}

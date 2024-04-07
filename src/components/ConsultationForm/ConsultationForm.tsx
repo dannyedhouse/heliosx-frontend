@@ -1,30 +1,30 @@
 import { useEffect, useState } from "react";
-import { queryQuestions } from "../../api/queryQuestions";
+import { Question } from "../../api/queryQuestions";
 import { submitAnswers } from "../../api/submitAnswers";
 import { Button } from "../Button/Button";
-import { RadioField } from "./RadioField";
+import { RadioField } from "../RadioField/RadioField";
 
-export interface ConsultationAnswers {
-  medication: string;
-  answers: {
-    question: string;
-    answer: boolean;
-  };
+interface ConsultationFormProps {
+  questions: Question[];
 }
 
-export const ConsultationForm = () => {
-  const questions = queryQuestions();
+export interface Answer {
+  question: string;
+  answer: boolean;
+}
+
+export const ConsultationForm = ({ questions }: ConsultationFormProps) => {
   const [questionIndex, setQuestionIndex] = useState(0);
   const [activeQuestion, setActiveQuestion] = useState(questions[0]);
-  const [answers, setAnswers] = useState<boolean[]>(
-    Array(questions.length).fill(true)
+  const [answers, setAnswers] = useState<Answer[]>(
+    questions.map((question) => ({ question: question.question, answer: true }))
   );
   const [isFinalQuestion, setIsFinalQuestion] = useState<boolean>(false);
   const [isFormComplete, setIsFormComplete] = useState(false);
 
   const handleAnswerChange = (answer: boolean) => {
     const updatedAnswers = [...answers];
-    updatedAnswers[questionIndex] = answer;
+    updatedAnswers[questionIndex].answer = answer;
     setAnswers(updatedAnswers);
   };
 
@@ -55,6 +55,8 @@ export const ConsultationForm = () => {
 
   return !isFormComplete ? (
     <form
+      title="consultation form"
+      name="consultation form"
       onSubmit={handleSubmit}
       className="max-w-[600px] min-w-[90%] flex flex-col h-full"
     >
@@ -83,14 +85,12 @@ export const ConsultationForm = () => {
           <RadioField
             fieldValue="Yes"
             onChange={() => handleAnswerChange(true)}
-            checked={
-              answers[questionIndex] === true || answers[questionIndex] === null
-            }
+            checked={answers[questionIndex]?.answer === true}
           />
           <RadioField
             fieldValue="No"
             onChange={() => handleAnswerChange(false)}
-            checked={answers[questionIndex] === false}
+            checked={answers[questionIndex]?.answer === false}
           />
         </div>
       </div>

@@ -1,5 +1,6 @@
 import "./App.css";
 import { queryQuestions } from "./api/queryQuestions";
+import { Breadcrumbs } from "./components/Breadcrumbs/Breadcrumbs";
 import { ConsultationForm } from "./components/ConsultationForm/ConsultationForm";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
@@ -13,8 +14,9 @@ function App() {
         <Header />
         <main className="flex-1 overflow-y-auto bg-background flex justify-center">
           <div className="container">
-            <div className="flex justify-between h-full">
-              <div className="p-4 m-auto lg:m-0">
+            <div className="flex justify-between p-4 m-auto lg:m-0 h-full">
+              <div className="pt-0 px-2 m-auto lg:m-0 h-full md:h-[90%]">
+                <Breadcrumbs />
                 {<ConsultationForm questions={questions} />}
               </div>
               <img

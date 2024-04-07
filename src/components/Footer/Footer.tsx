@@ -18,8 +18,8 @@ export const Footer = ({ usefulLinks, contactLinks }: FooterProps) => {
               <b>Useful links</b>
             </h2>
             <ul className="list-none" aria-label="useful links list">
-              {usefulLinks.map((link) => (
-                <a href={link.url}>
+              {usefulLinks.map((link, i) => (
+                <a href={link.url} key={link.url + i}>
                   <li>{link.text}</li>
                 </a>
               ))}
@@ -30,8 +30,8 @@ export const Footer = ({ usefulLinks, contactLinks }: FooterProps) => {
               <b>Contact us</b>
             </h2>
             <ul className="list-none" aria-label="contact links list">
-              {contactLinks.map((link) => (
-                <a href={link.url}>
+              {contactLinks.map((link, i) => (
+                <a href={link.url} key={link.url + i}>
                   <li>{link.text}</li>
                 </a>
               ))}

@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  a:hover {
+    @apply underline;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-[1172px];
+  }
+}

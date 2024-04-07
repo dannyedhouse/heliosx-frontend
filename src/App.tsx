@@ -15,9 +15,9 @@ function App() {
         <main className="flex-1 overflow-y-auto bg-background flex justify-center">
           <div className="container">
             <div className="flex justify-between p-4 m-auto lg:m-0 h-full">
-              <div className="pt-0 px-2 m-auto lg:m-0 h-full md:h-[90%]">
+              <div className="pt-0 px-2 m-auto lg:m-0 h-full lg:h-[80%]">
                 <Breadcrumbs />
-                {<ConsultationForm questions={questions} />}
+                <ConsultationForm questions={questions} />
               </div>
               <img
                 src="./hero.png"

@@ -1,4 +1,5 @@
 import "./App.css";
+import { ConsultationForm } from "./components/ConsultationForm/ConsultationForm";
 import { Footer } from "./components/Footer/Footer";
 import { Header } from "./components/Header/Header";
 
@@ -7,18 +8,15 @@ function App() {
     <>
       <div className="min-h-screen flex flex-col">
         <Header />
-        <main className="flex-1 overflow-y-auto bg-background flex items-center justify-center">
+        <main className="flex-1 overflow-y-auto bg-background flex justify-center">
           <div className="container">
-            <div className="flex justify-between">
-              <h1>
-                Answer a few questions from our pharmacists to see if you are
-                eligible for Genovian Pear Solution.
-              </h1>
+            <div className="flex justify-between h-full">
+              <div className="p-4 m-auto lg:m-0">{<ConsultationForm />}</div>
               <img
                 src="./hero.png"
                 width={400}
                 height={400}
-                className="hidden lg:block"
+                className="hidden lg:block self-center"
               ></img>
             </div>
           </div>

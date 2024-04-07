@@ -17,7 +17,7 @@ export const Footer = ({ usefulLinks, contactLinks }: FooterProps) => {
             <h2>
               <b>Useful links</b>
             </h2>
-            <ul className="list-none">
+            <ul className="list-none" aria-label="useful links list">
               {usefulLinks.map((link) => (
                 <a href={link.url}>
                   <li>{link.text}</li>
@@ -29,7 +29,7 @@ export const Footer = ({ usefulLinks, contactLinks }: FooterProps) => {
             <h2>
               <b>Contact us</b>
             </h2>
-            <ul className="list-none">
+            <ul className="list-none" aria-label="contact links list">
               {contactLinks.map((link) => (
                 <a href={link.url}>
                   <li>{link.text}</li>

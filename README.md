@@ -4,7 +4,7 @@
 
 1. Clone the repository
 2. Run `npm i` to install dependencies
-3. Start the application with `npm run dev` - which will run at http://localhost:5174/
+3. Start the application with `npm run dev` - which will run at http://localhost:5173/
 4. Run `npm run test` to run the tests using Jest and react-testing-library
 
 Node - v20.9.0

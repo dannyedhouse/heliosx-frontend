@@ -1,5 +1,7 @@
-import { Answer } from "../components/ConsultationForm/ConsultationForm";
+import { Question } from "./queryQuestions";
 
-export const submitAnswers = (answers: Answer[]) => {
-  console.log(answers);
+export const submitAnswers = (answers: boolean[], questions: Question[]) => {
+  answers.forEach((answer, i) => {
+    console.log(`Question: ${questions[i].question} Answer: ${answer} `);
+  });
 };

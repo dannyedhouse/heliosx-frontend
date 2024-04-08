@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Question } from "../../api/queryQuestions";
 import { submitAnswers } from "../../api/submitAnswers";
 import { Button } from "../Button/Button";
@@ -8,46 +8,30 @@ interface ConsultationFormProps {
   questions: Question[];
 }
 
-export interface Answer {
-  question: string;
-  answer: boolean;
-}
-
 export const ConsultationForm = ({ questions }: ConsultationFormProps) => {
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [activeQuestion, setActiveQuestion] = useState(questions[0]);
-  const [answers, setAnswers] = useState<Answer[]>(
-    questions.map((question) => ({ question: question.question, answer: true }))
+  const [answers, setAnswers] = useState<boolean[]>(
+    Array(questions.length).fill(true)
   );
-  const [isFinalQuestion, setIsFinalQuestion] = useState<boolean>(false);
   const [isFormComplete, setIsFormComplete] = useState(false);
+  const isFinalQuestion = questions.length === questionIndex + 1;
 
   const handleAnswerChange = (answer: boolean) => {
     const updatedAnswers = [...answers];
-    updatedAnswers[questionIndex].answer = answer;
+    updatedAnswers[questionIndex] = answer;
     setAnswers(updatedAnswers);
   };
 
   const goToPreviousQuestion = () => {
     setQuestionIndex(questionIndex - 1);
-    if (isFinalQuestion) {
-      setIsFinalQuestion(false);
-    }
   };
 
   const goToNextQuestion = () => {
     setQuestionIndex(questionIndex + 1);
   };
 
-  useEffect(() => {
-    setActiveQuestion(questions[questionIndex]);
-    if (questionIndex === Object.keys(questions).length - 1) {
-      setIsFinalQuestion(true);
-    }
-  }, [questionIndex, questions]);
-
   const handleSubmit = () => {
-    submitAnswers(answers);
+    submitAnswers(answers, questions);
     setIsFormComplete(true);
   };
 
@@ -71,11 +55,11 @@ export const ConsultationForm = ({ questions }: ConsultationFormProps) => {
           </div>
           <div className="mb-4">
             <h3>
-              <b>{activeQuestion.question}</b>
+              <b>{questions[questionIndex].question}</b>
             </h3>
-            {activeQuestion.subInfo?.length && (
+            {questions[questionIndex].subInfo?.length && (
               <ul className="text-xs">
-                {activeQuestion.subInfo?.map((info) => (
+                {questions[questionIndex].subInfo?.map((info) => (
                   <li className="list-inside list-disc" key={info}>
                     {info}
                   </li>
@@ -89,17 +73,17 @@ export const ConsultationForm = ({ questions }: ConsultationFormProps) => {
           <RadioField
             fieldValue="Yes"
             onChange={() => handleAnswerChange(true)}
-            checked={answers[questionIndex]?.answer === true}
+            checked={answers[questionIndex] === true}
           />
           <RadioField
             fieldValue="No"
             onChange={() => handleAnswerChange(false)}
-            checked={answers[questionIndex]?.answer === false}
+            checked={answers[questionIndex] === false}
           />
         </div>
       </div>
 
-      <div className="flex flex-col md:flex-row w-full gap-2 bottom-0 sticky">
+      <div className="flex flex-col md:flex-row w-full gap-2 bottom-0 sticky pb-8">
         {questionIndex > 0 ? (
           <Button
             variant="primary"
@@ -111,11 +95,17 @@ export const ConsultationForm = ({ questions }: ConsultationFormProps) => {
         ) : null}
 
         {isFinalQuestion ? (
-          <Button variant="submit" type="submit" className="w-full">
+          <Button
+            variant="submit"
+            type="submit"
+            className="w-full"
+            key="submit"
+          >
             Submit
           </Button>
         ) : (
           <Button
+            key="next"
             variant="primary"
             className="w-full"
             onClick={goToNextQuestion}

@@ -58,7 +58,7 @@ export const ConsultationForm = ({ questions }: ConsultationFormProps) => {
       title="consultation form"
       name="consultation form"
       onSubmit={handleSubmit}
-      className="max-w-[600px] flex flex-col h-[90%] w-full lg:min-w-[600px]"
+      className="max-w-[600px] flex flex-col h-[80%] w-full lg:min-w-[600px]"
     >
       <div className="flex-grow">
         <div className="flex flex-col gap-2">

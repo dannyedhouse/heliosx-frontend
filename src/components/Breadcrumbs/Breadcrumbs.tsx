@@ -1,6 +1,6 @@
 export const Breadcrumbs = () => {
   return (
-    <ol className="inline-flex items-center space-x-1 md:space-x-2 text-sm mb-6 flex-wrap">
+    <ol className="inline-flex items-center space-x-1 md:space-x-2 text-sm pb-6 flex-wrap">
       <li className="inline-flex items-center">
         <a href="/" className="inline-flex items-center text-sm">
           <svg
